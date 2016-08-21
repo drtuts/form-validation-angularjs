@@ -1,0 +1,142 @@
+<html lang="en" ng-app="app_form_validation">
+<head>
+	<meta charset="utf-8">
+	<title>Example form validation</title>
+
+<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<script src="js/angular.min.js"></script>
+
+	<script src="js/angular-route.min.js"></script>
+
+	<script src="js/app.js"></script>
+	
+
+	<style type="text/css">
+
+	::selection { background-color: #E13300; color: white; }
+	::-moz-selection { background-color: #E13300; color: white; }
+
+	body {
+		background: #e8edf2 none repeat scroll 0 0;
+		margin: 40px;
+		font-size:14px;
+		color: #4F5155;
+	}
+
+	a {
+		color: #003399;
+		background-color: transparent;
+		font-weight: normal;
+	}
+
+	h1 {
+		color: #444;
+		background-color: transparent;
+		border-bottom: 1px solid #D0D0D0;
+		font-size: 19px;
+		font-weight: normal;
+		margin: 0 0 14px 0;
+		padding: 14px 15px 10px 15px;
+	}
+
+	code {
+		font-family: Consolas, Monaco, Courier New, Courier, monospace;
+		font-size: 12px;
+		background-color: #f9f9f9;
+		border: 1px solid #D0D0D0;
+		color: #002166;
+		display: block;
+		margin: 14px 0 14px 0;
+		padding: 12px 10px 12px 10px;
+	}
+
+	#body {
+		margin: 0 15px 0 15px;
+	}
+
+	p.footer {
+		text-align: right;
+		font-size: 11px;
+		border-top: 1px solid #D0D0D0;
+		line-height: 32px;
+		padding: 0 10px 0 10px;
+		margin: 20px 0 0 0;
+	}
+
+	#container {
+		margin: 10px;
+		border: 1px solid #D0D0D0;
+		box-shadow: 0 0 8px #D0D0D0;
+	}
+	</style>
+</head>
+<body>
+	<h1>Welcome to form validation</h1>
+
+
+		<div class="panel-content container">
+
+	    	<div id="body" style="min-height:300px;">
+
+			 <div class="row">
+    			
+    			<form name="form_validation" ng-submit="form_validation.$valid && submit()" novalidate ng-controller="BasicFormValidation">
+
+			    	<div class="col-md-5">
+
+						<!-- Message Starts -->
+						<div class="success_notice" style="display:none;">
+					      <div class="alert alert-success">
+					      	<a href="#" class="close" data-dismiss="alert">&times;</a>
+					      	New Alert Created Successfully.</div>
+					    </div>
+
+						<div class="error_notice" style="display:none;">
+					      <div class="alert alert-success">
+					      	<a href="#" class="close" data-dismiss="alert">&times;</a>
+					      	Something Wrond :-(, Please try again.</div>
+					    </div>
+
+						<div ng-show="form_validation.$submitted || form_validation.to_address.$touched">
+					      <div class="alert alert-warning" ng-show="form_validation.to_address.$error.required || form_validation.to_address.$error.email"><a href="#" class="close" data-dismiss="alert">&times;</a>Enter valid Email Addresses.</div>
+					    </div>
+
+						<div ng-show="form_validation.$submitted || form_validation.frequencies.$touched">
+					      <div class="alert alert-warning" ng-show="form_validation.frequencies.$error.required"><a href="#" class="close" data-dismiss="alert">&times;</a>Select valid Frequency.</div>
+					    </div>
+
+						<div ng-show="form_validation.$submitted || form_validation.average.$touched">
+					      <div class="alert alert-warning" ng-show="form_validation.average.$error.required"><a href="#" class="close" data-dismiss="alert">&times;</a>Select valid Average Number.</div>
+					    </div>
+
+						<div class="form-group">
+							<label for="ToAddress"> To Address: </label>
+							<input type="email" name="to_address" id="to_address" class="form-control" ng-model="user.to_address" ng-required="true"/>
+						</div>
+
+						<div class="form-group">
+							<label for="ClassName">Name: </label>
+							<input type="text" name="class_name" id="class_name" class="form-control" ng-model="user.class_name" ng-required="true" />
+						</div>
+
+	
+						<div class="form-group">
+							<label for="Reports">Frequency: </label>
+							<select name="frequencies" id="frequencies" class="form-control" ng-model="user.frequency" ng-required="true" minlength="1">
+								<option value="" disabled selected>Select any Frequency</option>
+								<option ng-repeat = "frequency in frequencies" value="{{frequency.id}}">{{frequency.name}}</value>
+							</select>
+						</div>
+
+						<div class="form-group">
+								<input type="submit" name="update" id="update" value="Submit" class="btn btn-primary" />
+						</div>
+
+					</div> <!-- Ends Col -->
+
+				</div>
+			</form>
+	</div> <!-- Ends Container -->
+	
